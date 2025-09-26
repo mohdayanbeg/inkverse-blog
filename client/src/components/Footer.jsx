@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <div className=" w-full mt-20 flex flex-col md:flex-row items-start md:items-center 
+    <div className=" w-full mt-20npm install react-quill-new --save flex flex-col md:flex-row items-start md:items-center 
                   justify-start md:justify-between 
                   py-6 px-6 md:px-10 
                   bg-teal-200 border-t border-gray-200 
