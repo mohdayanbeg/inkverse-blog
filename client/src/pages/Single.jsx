@@ -11,7 +11,6 @@ const getText = (html) => {
 };
 
 const Single = () => {
-  // Mock Data (Data remains UNCHANGED as requested)
   const post = {
     id: 1,
     title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
