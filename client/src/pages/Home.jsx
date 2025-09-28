@@ -42,7 +42,7 @@ const Home = () => {
 
       <div className="p-4 md:px-10 lg:px-20 overflow-hidden">
 
-        <div className="flex flex-col mt-12 md:mt-[50px] gap-20 md:gap-[150px]">
+        <div className="flex flex-col mt-12 md:mt-[50px] gap-20 md:gap-[150px] mb-30">
 
           {posts.map((post, index) => (
 
@@ -57,11 +57,16 @@ const Home = () => {
                 <div className="custom-img-shadow"></div>
 
                 <div className="relative z-10">
+                  <div className={`hidden lg:block absolute h-[400px] w-full bg-teal-200 ${/*top-7*/ 1==1} ${(index % 2 === 0) ? 'right-7' : 'left-7'}`}>
+
+                  </div>
                   <img
                     src={post.img}
                     alt={post.title}
-                    className="w-full max-h-[400px] object-cover"
+                    className="w-full max-h-[400px] object-cover relative"
                   />
+                  
+                  
                 </div>
               </div>
 

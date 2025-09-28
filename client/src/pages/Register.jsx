@@ -17,8 +17,8 @@ const Register = () => {
         console.log("Password:", password);
     }
     return (
-        <div className="hero min-h-screen bg-green-100 w-screen">
-            <div className="hero-content flex-col justify-center items-center w-[90%] max-w-4xl gap-10">
+        <div className=" min-h-screen bg-green-100 w-screen">
+            <div className="flex-col justify-center items-center w-[90%] max-w-4xl gap-10">
                 
            
                 <div className="text-center text-teal-700">

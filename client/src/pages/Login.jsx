@@ -18,8 +18,8 @@ const Login = () => {
     }
 
     return (
-        <div className="hero min-h-screen bg-green-100 w-screen">
-            <div className="hero-content flex-col lg:flex-row-reverse justify-center items-center w-[90%] max-w-5xl py-8 lg:py-12 gap-8 lg:gap-10">
+        <div className="min-h-screen bg-green-100 w-screen">
+            <div className="flex-col lg:flex-row-reverse justify-center items-center w-[90%] max-w-5xl py-8 lg:py-12 gap-8 lg:gap-10">
                 
                 <div className="text-center flex flex-col justify-center items-center lg:w-1/2 text-teal-700 p-4">
                     <h1 className="text-4xl sm:text-5xl font-bold mb-3 sm:mb-4">Welcome Back!</h1>
