@@ -3,7 +3,7 @@ import mysql from "mysql"
 // export const connectDB = async ()=>{
 //     try{
 //      await mysql.createConnection({
-//     host: process.env.DB_HOST || "localhost",
+//     host:  process.env.DB_HOST|| "localhost",
 //     user: process.env.DB_USER || "root",
 //     password: process.env.DB_PASSWORD || "Mo@24092003",
 //     database: process.env.DB_NAME || "inkverseblogs",
@@ -15,8 +15,8 @@ import mysql from "mysql"
 // }
 
 export const db = mysql.createConnection({
-    host:"localhost",
-    user:"root",
-    password:"Mo@24092003",
-    database:"inkverseblogs",
+    host: process.env.DB_HOST,
+    user:process.env.DB_USER,
+    password:process.env.DB_PASSWORD,
+    database:process.env.DB_NAME,
 })
