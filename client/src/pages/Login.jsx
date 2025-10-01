@@ -2,7 +2,8 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
-import { serverUri } from '../App';
+import { useContext } from 'react';
+import { AuthContext } from '../context/authContext.jsx';
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -10,21 +11,25 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [err, setErr] = useState(null)
     const navigate = useNavigate();
+    const {login} = useContext(AuthContext)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setErr(null)
 
         try {
-            const res = await axios.post(`${serverUri}/api/auth/login`, { username, password }, { withCredentials: true })
-
+            
+            await login({username,password})
 
             setUsername('')
             setPassword('')
+            navigate('/')
+            
 
 
         } catch (error) {
-            console.log(error);
             setErr(error.response.data.message)
+            console.log(error);
             setUsername('')
             setPassword('')
 

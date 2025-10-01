@@ -57,7 +57,7 @@ const Home = () => {
                 <div className="custom-img-shadow"></div>
 
                 <div className="relative z-10">
-                  <div className={`hidden lg:block absolute h-[400px] w-full bg-teal-200 ${/*top-7*/ 1==1} ${(index % 2 === 0) ? 'right-7' : 'left-7'}`}>
+                  <div className={`hidden lg:block absolute h-[400px] w-full bg-teal-200 top-7 ${(index % 2 === 0) ? 'right-7' : 'left-7'}`}>
 
                   </div>
                   <img
@@ -72,12 +72,12 @@ const Home = () => {
 
               <div className="content flex flex-col justify-between flex-3-basis-0 w-full">
                 <Link className="link no-underline text-inherit" to={`/post/${post.id}`}>
-                  <h1 className="text-4xl sm:text-5xl lg:text-[48px] font-bold mb-4">
+                  <h1 className="text-4xl text-black sm:text-5xl lg:text-[48px] font-bold mb-4">
                     {post.title}
                   </h1>
                 </Link>
 
-                <p className="text-lg text-gray-700 mb-6">{getText(post.desc)}</p>
+                <p className="text-lg text-black mb-6">{getText(post.desc)}</p>
 
                 <button className="w-max px-5 py-2.5 border border-teal-500 bg-white text-teal-500 cursor-pointer 
                                  hover:border-white hover:bg-teal-100 hover:text-black 

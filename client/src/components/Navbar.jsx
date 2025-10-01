@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from "../assets/logo.png"
+import { useContext } from 'react';
+import { AuthContext } from '../context/authContext';
 const Navbar = () => {
-  const currentUser = { name: 'John', loggedIn: true }; 
+  
+  const {currentUser,logout}= useContext(AuthContext)
 
   return (
     <div className="flex items-center justify-between p-4 px-6 md:px-10 bg-white border-b border-gray-200 shadow-sm font-sans">
@@ -27,22 +29,19 @@ const Navbar = () => {
           <Link to="/category/food" className="hover:text-teal-600 transition-colors">Food</Link>
         </div>
         <div className="flex items-center gap-4">
-          {currentUser.loggedIn ? (
-            <>
-              <span className="font-bold text-teal-700 hidden sm:block">{currentUser.name}</span>
-              <Link to="/logout" className="hover:text-teal-600 transition-colors font-bold">Logout</Link>
+          
+              <span className="font-bold text-teal-700 hidden sm:block">{currentUser?.username}</span>
+              {currentUser ? (
+            <span className="font-semibold cursor-pointer" onClick={logout}>Logout</span>
+          ) : (
+            <Link className="font-semibold" to="/login">
+              Login
+            </Link>
+          )}
+
               <Link to="/write" className="w-13 h-13 rounded-full bg-teal-200 flex items-center justify-center text-sm font-semibold text-teal-800 hover:bg-transparent border-2 border-teal-200 transition-colors cursor-pointer hover:font-medium">
                 Write
               </Link>
-            </>
-          ) : (
-            <>
-              <Link to="/login" className="hover:text-teal-600 transition-colors">Login</Link>
-              <Link to="/register" className="w-10 h-10 rounded-full bg-teal-200 flex items-center justify-center text-sm font-semibold text-teal-800 hover:bg-teal-300 transition-colors cursor-pointer">
-                Join
-              </Link>
-            </>
-          )}
         </div>
       </div>
     </div>
