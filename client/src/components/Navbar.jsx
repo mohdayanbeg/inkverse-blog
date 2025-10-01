@@ -21,12 +21,12 @@ const Navbar = () => {
 
       <div className="flex items-center gap-6 text-sm font-medium text-gray-700">
         <div className="hidden md:flex items-center gap-5 uppercase text-xs tracking-wider">
-          <Link to="/category/art" className="hover:text-teal-600 transition-colors">Art</Link>
-          <Link to="/category/science" className="hover:text-teal-600 transition-colors">Science</Link>
-          <Link to="/category/technology" className="hover:text-teal-600 transition-colors">Technology</Link>
-          <Link to="/category/cinema" className="hover:text-teal-600 transition-colors">Cinema</Link>
-          <Link to="/category/design" className="hover:text-teal-600 transition-colors">Design</Link>
-          <Link to="/category/food" className="hover:text-teal-600 transition-colors">Food</Link>
+          <Link to="/?cat=art" className="hover:text-teal-600 transition-colors">Art</Link>
+          <Link to="/?cat=science" className="hover:text-teal-600 transition-colors">Science</Link>
+          <Link to="/?cat=technology" className="hover:text-teal-600 transition-colors">Technology</Link>
+          <Link to="/?cat=cinema" className="hover:text-teal-600 transition-colors">Cinema</Link>
+          <Link to="/?cat=design" className="hover:text-teal-600 transition-colors">Design</Link>
+          <Link to="/?cat=food" className="hover:text-teal-600 transition-colors">Food</Link>
         </div>
         <div className="flex items-center gap-4">
           
