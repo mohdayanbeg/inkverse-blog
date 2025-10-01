@@ -6,6 +6,8 @@ import Register from './pages/Register'
 import Single from './pages/Single'
 import Write from './pages/Write'
 
+export const serverUri="http://localhost:8000"
+
 const App = () => {
   return (
 <>
