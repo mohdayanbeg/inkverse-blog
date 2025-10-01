@@ -3,6 +3,7 @@ import express from 'express'
 import postRouter from './routes/posts.js'
 import authRouter from './routes/auth.js'
 import cors from "cors"
+import cookieParser from 'cookie-parser'
 
 
 
@@ -14,6 +15,7 @@ app.use(cors({
 }))
 
 app.use(express.json())
+app.use(cookieParser())
 
 
 app.use('/api/posts',postRouter)
