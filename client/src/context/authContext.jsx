@@ -12,6 +12,7 @@ export const AuthContexProvider = ({ children }) => {
   const login = async ({username,password}) => {
     try {
         const res = await axios.post(`${serverUri}/api/auth/login`, { username, password }, { withCredentials: true })
+        
     setCurrentUser(res.data);
     } catch (error) {
         throw error

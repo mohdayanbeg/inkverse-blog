@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
@@ -27,7 +26,9 @@ const Login = () => {
             
 
 
-        } catch (error) {
+        } catch (error){
+            
+            
             setErr(error.response.data.message)
             console.log(error);
             setUsername('')

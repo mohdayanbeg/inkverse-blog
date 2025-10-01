@@ -1,5 +1,4 @@
 import express from 'express'
-// import { connectDB } from './config/db.js'
 import postRouter from './routes/posts.js'
 import authRouter from './routes/auth.js'
 import cors from "cors"

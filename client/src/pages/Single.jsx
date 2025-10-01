@@ -1,52 +1,61 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '../context/authContext';
+import axios from 'axios';
+import { serverUri } from '../App';
+import moment from 'moment'
 
-const getText = (html) => {
-    const doc = new DOMParser().parseFromString(html, 'text/html');
-    return doc.body.textContent;
-};
 
 const Single = () => {
-    const post = {
-        id: 1,
-        title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-        desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-        img: "https://images.pexels.com/photos/7008010/pexels-photo-7008010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        userImg: "https://via.placeholder.com/150",
-        username: "JaneDoe",
-    };
-    const currentUser = { username: "JaneDoe" };
-    const posts = [
-        {
-            id: 1,
-            title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-            desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-            img: "https://images.pexels.com/photos/7008010/pexels-photo-7008010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        },
-        {
-            id: 2,
-            title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-            desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-            img: "https://images.pexels.com/photos/6489663/pexels-photo-6489663.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        },
-        {
-            id: 3,
-            title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-            desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-            img: "https://images.pexels.com/photos/4230630/pexels-photo-4230630.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        },
-        {
-            id: 4,
-            title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-            desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-            img: "https://images.pexels.com/photos/6157049/pexels-photo-6157049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        },
-    ];
-    const handleDelete = () => console.log('Delete clicked');
+    const {currentUser}= useContext(AuthContext)
+  const [post,setPost]=useState({})
+  const [posts,setPosts]=useState([])
+  const location = useLocation()
+  const postId=location.pathname.split('/')[2]
+  const navigate=useNavigate()
+  
+
+
+  
+  useEffect(()=>{
+    const fetchData=async ()=>{
+      try {
+          const res= await axios.get(`${serverUri}/api/posts`)
+          
+          const post = await axios.get(`${serverUri}/api/posts/${postId}`)
+          
+        setPosts(res.data)
+        setPost(post.data)
+        
+      } catch (error) {
+        console.log(error);
+        
+      }
+    }
+    fetchData()
+  },[postId])
+
+
+    
+const handleDelete = async () => {
+    try {
+        console.log(postId);
+        
+        await axios.delete(`${serverUri}/api/posts/${postId}`,{withCredentials:true})
+        navigate('/')
+    } catch (error) {
+        console.log(error);
+        
+    }
+    
+}
 
 
     return (
@@ -58,7 +67,7 @@ const Single = () => {
                 <div className="content flex-grow lg:w-3/4 flex flex-col gap-6">
 
                     <img
-                        src={post.img}
+                        src={post.image}
                         alt={post.title}
                         className="w-full h-72 md:h-[300px] object-cover rounded-lg shadow-md"
                     />
@@ -74,10 +83,10 @@ const Single = () => {
 
                         <div className="info">
                             <span className="font-bold text-gray-800">{post.username}</span>
-                            <p className="text-xs text-gray-500">Posted {/*{moment(post.date).fromNow()}*/}</p>
+                            <p className="text-xs text-gray-500">Posted {moment(post.created_at).fromNow()}</p>
                         </div>
-
-                        {currentUser.username === post.username && (
+                        
+                        {(currentUser.username == post.username) && (
                             <div className="edit flex gap-2 ml-auto text-teal-600">
                                 <Link to={`/write?edit=2`} state={post}>
                                     <CiEdit className="w-6 h-6 cursor-pointer hover:text-teal-400 transition" />
@@ -91,9 +100,10 @@ const Single = () => {
                         {post.title}
                     </h1>
 
-                    <div className="text-justify leading-loose text-lg text-gray-700">
-                        <p className="mb-4">{post.desc}</p>
-                        <p className="mb-4">This is where the main body of the blog post would go. We need to ensure the text is justified and line-height is comfortable for reading.</p>
+                    <div className="text-justify leading-loose text-lg">
+                        <p className='text-black font-semibold text-sm mb-2'>Description: <span className="text-gray-700 font-light text-sm tracking-tight" >{post.description}</span></p>
+                        
+                        <p className="mb-4 text-black">{post.content}</p>
                     </div>
 
                 </div>
@@ -103,9 +113,12 @@ const Single = () => {
                     <h1 className="text-xl font-bold text-gray-700 mb-4">Other posts you may like:</h1>
 
                     {posts.map((relatedPost) => (
-                        <div className="post flex flex-col gap-2 mb-6" key={relatedPost.id}>
+                        
+                        
+                        relatedPost.id!=postId && relatedPost.cat==post.cat &&
+                            (<div className="post flex flex-col gap-2 mb-6" key={relatedPost.id}>
                             <img
-                                src={relatedPost.img}
+                                src={relatedPost.image}
                                 alt={relatedPost.title}
                                 className="w-full h-24 object-cover rounded-lg"
                             />
@@ -115,13 +128,14 @@ const Single = () => {
                             </h2>
 
                             <button
-                                className="w-full px-3 py-1 border border-teal-500 text-teal-500 text-xs cursor-pointer rounded
-                                   hover:bg-teal-100 hover:text-black transition duration-300"
+                                className="w-full px-3 py-1 border border-teal-500 text-teal-500 text-xs cursor-pointer rounded hover:bg-teal-100 hover:text-black transition duration-300"
+                                onClick={()=>{navigate(`/post/${relatedPost.id}`)}}
                             >
                                 Read More
                             </button>
-                        </div>
-                    ))}
+                        </div>)
+                    ))
+                    }
                 </div>
             </div>
 
@@ -130,12 +144,12 @@ const Single = () => {
 
                 <div className="flex overflow-x-scroll gap-4 pb-4 -mx-4 px-4 snap-x">
                     {posts.map((relatedPost) => (
-                        <div
+                        relatedPost.id!=postId && relatedPost.cat==post.cat &&(<div
                             className="post flex-shrink-0 w-64 snap-center bg-white border border-gray-100 rounded-lg shadow-md overflow-hidden"
                             key={relatedPost.id}
                         >
                             <img
-                                src={relatedPost.img}
+                                src={relatedPost.image}
                                 alt={relatedPost.title}
                                 className="w-full h-32 object-cover"
                             />
@@ -146,14 +160,15 @@ const Single = () => {
                                 <button
                                     className=" mt-1 px-3 py-1 text-xs border border-teal-500 text-teal-500 cursor-pointer rounded
                                            hover:bg-teal-100 hover:text-black transition duration-300"
+                                           onClick={()=>{navigate(`/post/${relatedPost.id}`)}}
                                 >
                                     View Post
                                 </button>
                             </div>
-                        </div>
+                        </div>)
                     ))}
                 </div>
-            </div>
+            </div> 
 
             <Footer />
         </div>
