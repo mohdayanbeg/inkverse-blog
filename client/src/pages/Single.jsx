@@ -26,6 +26,14 @@ const Single = () => {
   return doc.body.textContent;
 };
 
+ const getImagePath = (image) => {
+        if (!image) return 'https://placehold.co/600x400/99f6e4/134e4a?text=No+Image';
+        if (image.startsWith('http') || image.startsWith('data:')) {
+            return image;
+        }
+        // Assumes local files are accessible directly from the root context (e.g., /filename.jpg)
+        return `/${image}`; 
+    };
 
   
   useEffect(()=>{
@@ -65,15 +73,17 @@ const handleDelete = async () => {
     return (
         <div>
             <Navbar />
+            {console.log(post?.image)
+            }
 
             <div className="single flex flex-col lg:flex-row gap-8 lg:gap-12 p-4 lg:p-12 max-w-7xl mx-auto">
 
                 <div className="content flex-grow lg:w-3/4 flex flex-col gap-6">
 
                     <img
-                        src={post.image}
+                        src= {getImagePath(post.image)}
                         alt={post.title}
-                        className="w-full h-72 md:h-[300px] object-cover rounded-lg shadow-md"
+                        className="w-full h-72 md:h-[300px] object-cover rounded-lg shadow-md lg:h-[450px]"
                     />
 
                     <div className="user flex items-center gap-3 text-sm">
@@ -122,7 +132,7 @@ const handleDelete = async () => {
                         relatedPost.id!=postId && relatedPost.cat==post.cat &&
                             (<div className="post flex flex-col gap-2 mb-6" key={relatedPost.id}>
                             <img
-                                src={relatedPost.image}
+                                src={getImagePath(relatedPost.image)}
                                 alt={relatedPost.title}
                                 className="w-full h-40 object-cover rounded-lg"
                             />
@@ -153,7 +163,7 @@ const handleDelete = async () => {
                             key={relatedPost.id}
                         >
                             <img
-                                src={relatedPost.image}
+                                src={getImagePath(relatedPost.image)}
                                 alt={relatedPost.title}
                                 className="w-full h-32 object-cover"
                             />

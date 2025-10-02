@@ -6,8 +6,8 @@ const postRouter = express.Router();
 
 postRouter.get("/", getPosts);
 postRouter.get("/:id", getPost);
-// postRouter.post("/", addPost);
+postRouter.post("/", addPost);
 postRouter.delete("/:id", deletePost);
-// postRouter.put("/:id", updatePost);
+postRouter.put("/:id", updatePost);
 
 export default postRouter;

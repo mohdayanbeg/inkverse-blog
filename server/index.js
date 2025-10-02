@@ -22,11 +22,11 @@ app.use('/api/posts',postRouter)
 app.use('/api/auth',authRouter)
 
 const storage=multer.diskStorage({
-    destination: (req,res,cb)=>{
+    destination: (req,file,cb)=>{
         cb(null, '../client/public')
     },
-    filename: (req,res,cb)=>{
-        cb(null, Date.now()+res.originalname)
+    filename: (req,file,cb)=>{
+        cb(null, Date.now()+file.originalname)
     }
 })
 

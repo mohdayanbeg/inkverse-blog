@@ -21,7 +21,7 @@ const Write = () => {
       const formData = new FormData();
       formData.append('file', file)
       const res = await axios.post(`${serverUri}/api/upload`, formData, { withCredentials: true })
-      console.log(res.data);
+      return res.data
 
     } catch (error) {
       console.log(error);
@@ -33,11 +33,12 @@ const Write = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const imgUrl = upload()
+    const imgUrl = await upload()
     try {
-      state ? await axios.put(`${serverUri}/api/posts/${state.id}`, { title, description, content: value, cat, image: file ? imgUrl : '' }, { withCredentials: true }) : await axios.post(`${serverUri}/api/posts`, { title, description, content: value, cat, image: file ? imgUrl : '' }, { withCredentials: true }) 
+      state ? await axios.put(`${serverUri}/api/posts/${state.id}`, { title, description, content: value, cat, image: file ? imgUrl : "" }, { withCredentials: true }) : await axios.post(`${serverUri}/api/posts`, { title, description, content: value, cat, image: file ? imgUrl : "" }, { withCredentials: true }) 
     } catch (error) {
-
+        console.log(error);
+        
     }
   }
   return (
@@ -106,7 +107,7 @@ const Write = () => {
                 Save as a draft
               </button>
               <button onClick={handleSubmit} className="cursor-pointer text-white bg-teal-600 border border-teal-600 rounded px-3 py-1 text-xs hover:bg-teal-700 transition">
-                Publish
+                {!state? "Publish":"Update"}
               </button>
             </div>
           </div>
