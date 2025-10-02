@@ -7,10 +7,10 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { serverUri } from '../App';
 
-const getText = (html) => {
-  const doc = new DOMParser().parseFromString(html, 'text/html');
-  return doc.body.textContent;
-};
+// const getText = (html) => {
+//   const doc = new DOMParser().parseFromString(html, 'text/html');
+//   return doc.body.textContent;
+// };
 
 const Home = () => {
 
@@ -21,7 +21,6 @@ const Home = () => {
     const fetchData=async ()=>{
       try {
         const res = await axios.get(`${serverUri}/api/posts${cat}`)
-        console.log(res.data);
         setPosts(res.data)
         
       } catch (error) {
@@ -94,7 +93,7 @@ const Home = () => {
                   </h1>
                 </Link>
 
-                <p className="text-lg text-black mb-6">{getText(post.description)}</p>
+                <p className="text-lg text-black mb-6">{post.description}</p>
 
                 <button className="w-max px-5 py-2.5 border border-teal-500 bg-white text-teal-500 cursor-pointer 
                                  hover:border-white hover:bg-teal-100 hover:text-black 

@@ -21,6 +21,10 @@ const Single = () => {
   const postId=location.pathname.split('/')[2]
   const navigate=useNavigate()
   
+  const getText = (html) => {
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  return doc.body.textContent;
+};
 
 
   
@@ -29,10 +33,10 @@ const Single = () => {
       try {
           const res= await axios.get(`${serverUri}/api/posts`)
           
-          const post = await axios.get(`${serverUri}/api/posts/${postId}`)
+          const postRes = await axios.get(`${serverUri}/api/posts/${postId}`)
           
         setPosts(res.data)
-        setPost(post.data)
+        setPost(postRes.data)
         
       } catch (error) {
         console.log(error);
@@ -103,7 +107,7 @@ const handleDelete = async () => {
                     <div className="text-justify leading-loose text-lg">
                         <p className='text-black font-semibold text-sm mb-2'>Description: <span className="text-gray-700 font-light text-sm tracking-tight" >{post.description}</span></p>
                         
-                        <p className="mb-4 text-black">{post.content}</p>
+                        <p className="mb-4 text-black">{getText(post.content)}</p>
                     </div>
 
                 </div>
@@ -120,7 +124,7 @@ const handleDelete = async () => {
                             <img
                                 src={relatedPost.image}
                                 alt={relatedPost.title}
-                                className="w-full h-24 object-cover rounded-lg"
+                                className="w-full h-40 object-cover rounded-lg"
                             />
 
                             <h2 className="text-sm font-semibold text-gray-800 leading-snug hover:text-teal-600 transition">
