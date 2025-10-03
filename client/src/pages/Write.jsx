@@ -6,6 +6,7 @@ import 'react-quill-new/dist/quill.snow.css';
 import axios from 'axios';
 import { serverUri } from '../App';
 import { useLocation } from 'react-router-dom';
+import { RiImageAddFill } from "react-icons/ri";
 
 const Write = () => {
   const state = useLocation().state
@@ -14,6 +15,23 @@ const Write = () => {
   const [cat, setCat] = useState(state?.cat || '');
   const [description, setDescription] = useState(state?.description || '');
   const [file, setFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(
+        state?.image && state.image.startsWith('http') ? state.image : null
+    ); 
+
+const getLocalPreview = (selectedFile) => {
+        if (selectedFile) {
+            setPreviewUrl(URL.createObjectURL(selectedFile));
+        } else {
+            setPreviewUrl(null);
+        }
+    };
+
+    const handleFileChange = (e) => {
+        const selectedFile = e.target.files[0];
+        setFile(selectedFile);
+        getLocalPreview(selectedFile);
+    };
 
 
   const upload = async () => {
@@ -80,19 +98,26 @@ const Write = () => {
           <div className="item border border-gray-300 rounded-md p-4 flex flex-col gap-3 text-sm text-gray-600">
             <h1 className="text-xl font-bold text-gray-800">Publish</h1>
 
-            <span>
-              <b>Status: </b> Draft
-            </span>
-            <span>
-              <b>Visibility: </b> Public
-            </span>
+           <div className='flex justify-center items-center h-28 w-full border border-dashed border-gray-400 rounded-md overflow-hidden'>
+                            {previewUrl || state?.image ? (
+                                <img
+                                    src={previewUrl || state.image}
+                                    alt="Preview"
+                                    className="h-full w-full object-cover"
+                                />
+                            ) : (
+                                <RiImageAddFill className='h-full w-full p-4 text-gray-400' />
+                            )}
+                        </div>
 
             <input
               style={{ display: "none" }}
               type="file"
               id="file"
               name="file"
-              onChange={(e) => setFile(e.target.files[0])}
+              onChange={(e) =>{ setFile(e.target.files[0])
+                handleFileChange(e)
+              }}
             />
 
             <label

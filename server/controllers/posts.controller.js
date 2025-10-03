@@ -6,8 +6,8 @@ export const getPosts = async (req, res) => {
   try {
     
     const q = req.query.cat
-    ? "SELECT * FROM posts WHERE cat=?"
-    : "SELECT * FROM posts";
+    ? "SELECT * FROM posts WHERE cat=? ORDER BY created_at DESC"
+    : "SELECT * FROM posts ORDER BY created_at DESC";
 
   const [posts] = await pool.query(q, [req.query.cat])
     return res.status(201).json(posts);

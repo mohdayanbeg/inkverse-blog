@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useState } from 'react';
@@ -11,6 +11,7 @@ import { serverUri } from '../App';
 const Home = () => {
 
   const [posts,setPosts]=useState([])
+  const navigate = useNavigate()
   const location = useLocation()
   const cat = location.search
   useEffect(()=>{
@@ -67,7 +68,7 @@ const Home = () => {
 
                 <button className="w-max px-5 py-2.5 border border-teal-500 bg-white text-teal-500 cursor-pointer 
                                  hover:border-white hover:bg-teal-100 hover:text-black 
-                                 transition duration-300 ease-in-out">
+                                 transition duration-300 ease-in-out" onClick={()=>{navigate(`/post/${post.id}`)}}>
                   Read More
                 </button>
               </div>
