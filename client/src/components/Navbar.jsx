@@ -8,8 +8,9 @@ const Navbar = () => {
 
   return (
     <div className="flex items-center justify-between p-4 px-6 md:px-10 bg-white border-b border-gray-200 shadow-sm font-sans">
+
+
       <div className="flex items-center gap-3">
-        
         <div className='relative flex items-center'>
           <div className='absolute w-20 h-12 rounded-full  top-1/2 bg-teal-200 left-1/2 rotate-160 transform -translate-x-1/2 -translate-y-1/2 z-0 opacity-70'></div> 
           <div className="relative z-10">

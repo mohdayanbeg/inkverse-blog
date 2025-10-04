@@ -81,11 +81,11 @@ const Login = () => {
                             />
                         </div>
 
-                        <div className='flex justify-end pt-1'>
+                        {/* <div className='flex justify-end pt-1'>
                             <a href="/forgot-password" className="link link-hover text-sm text-teal-600 hover:text-teal-700">
                                 Forgot password?
                             </a>
-                        </div>
+                        </div> */}
                         <button type="submit" className="btn bg-teal-600 text-white hover:bg-teal-700 w-full mt-4 py-3 rounded-lg font-semibold transition-colors">
                             Log In
                         </button>

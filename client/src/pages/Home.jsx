@@ -52,7 +52,7 @@ const Home = () => {
                   <img
                     src={post.image}
                     alt={post.title}
-                    className="w-full max-h-[400px] h-full object-cover relative text-black"
+                    className="w-full max-h-[400px] h-full object-contain bg-white relative  text-black"
                   />
                   
               </div>
@@ -62,15 +62,15 @@ const Home = () => {
                   <h1 className="text-4xl text-black sm:text-5xl lg:text-[48px] font-bold mb-4">
                     {post.title}
                   </h1>
-                </Link>
-
                 <p className="text-lg text-black mb-6">{post.description}</p>
 
                 <button className="w-max px-5 py-2.5 border border-teal-500 bg-white text-teal-500 cursor-pointer 
                                  hover:border-white hover:bg-teal-100 hover:text-black 
-                                 transition duration-300 ease-in-out" onClick={()=>{navigate(`/post/${post.id}`)}}>
+                                 transition duration-300 ease-in-out">
                   Read More
                 </button>
+                </Link>
+
               </div>
 
             </div>

@@ -83,7 +83,7 @@ const handleDelete = async () => {
                     <img
                         src= {getImagePath(post.image)}
                         alt={post.title}
-                        className="w-full h-72 md:h-[300px] object-cover rounded-lg shadow-md lg:h-[450px]"
+                        className="w-full h-72 md:h-[300px] object-contain rounded-lg shadow-md lg:h-[450px]"
                     />
 
                     <div className="user flex items-center gap-3 text-sm">
@@ -91,7 +91,7 @@ const handleDelete = async () => {
                             <img
                                 src={post.userImg}
                                 alt={post.username}
-                                className="w-12 h-12 rounded-full object-cover"
+                                className="w-12 h-12 rounded-full object-contain"
                             />
                         )}
 
